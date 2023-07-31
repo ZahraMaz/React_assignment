@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom';
 import { firebase_signup } from '../module/firebase';
 import EmailInput from './EmailInput'
 import PasswordInput from './PasswordInput'
+import NameInput from './NameInput';
+import BirthdateInput from './BirthdateInput';
 
 
 function Signup(){
@@ -27,6 +29,14 @@ function Signup(){
     const handlePasswordChange = (newPassword) => {
       setPassword(newPassword);
     };
+
+    const handleNameChange = (newName) => {
+      setName(newName);
+    };
+  
+    const handleBirthdateChange = (newBirthdate) => {
+      setBirthdate(newBirthdate);
+    };
   
     
     const createUser=(e)=>{
@@ -41,14 +51,8 @@ function Signup(){
           <h1 id="form-header">Sign Up</h1>
         </div>
         <form id="Login-form">
-          <div className="input-field">
-            <label htmlFor="name">Name:</label>
-            <input type="text" id="name" required  onChange={nameChange}/><br />
-          </div>
-          <div className="input-field">
-            <label htmlFor="birthdate">Date of Birth:</label>
-            <input type="date" id="birthdate" required onChange={birthdateChange}/><br />
-          </div>
+          <NameInput onNameChange={handleNameChange} />
+          <BirthdateInput onBirthdateChange={handleBirthdateChange} />
           <EmailInput onEmailChange={handleEmailChange}/>
           <PasswordInput onPasswordChange={handlePasswordChange}/> 
           <div id="button_container">

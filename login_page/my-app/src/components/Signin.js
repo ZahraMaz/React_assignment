@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
+import React, {useState}  from 'react';
 import {Link} from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import {auth,signInWithEmailAndPassword ,firebase_createUserContent} from '../module/firebase'
+import EmailInput from './EmailInput'
+import PasswordInput from './PasswordInput'
 
 const Signin=()=>{
-  const [email,setEmail]=useState('')
-  const [password,setPassword]=useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const handleEmailChange = (newEmail) => {
+    setEmail(newEmail);
+  };
 
-  const emailChange=(e)=>{setEmail(e.target.value)}
-  const passwordChange=(e)=>{setPassword(e.target.value)}
+  const handlePasswordChange = (newPassword) => {
+    setPassword(newPassword);
+  };
+
   const history=useHistory();
 
   function signinUser(e){
     e.preventDefault()
+    // EmailInput()
+
+
     signInWithEmailAndPassword(auth, email,password)
     .then((userCredential) => {
         const user = userCredential.user;
@@ -32,14 +43,9 @@ const Signin=()=>{
           <h1 id="form-header">Sign In</h1>
         </div>
         <form id="Login-form">
-          <div className="input-field">
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" required  onChange={emailChange}/><br />
-          </div>
-          <div className="input-field">
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" required  onChange={passwordChange}/><br />
-          </div>
+         
+          <EmailInput onEmailChange={handleEmailChange}/>
+          <PasswordInput onPasswordChange={handlePasswordChange}/> 
           <div id="button_container">
             <button type="submit" id="signinbtn" onClick={signinUser}>Sign in</button>
           </div>

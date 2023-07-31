@@ -4,6 +4,9 @@ import './Signup.css'
 import {Link} from "react-router-dom"
 import { useHistory } from 'react-router-dom';
 import { firebase_signup } from '../module/firebase';
+import EmailInput from './EmailInput'
+import PasswordInput from './PasswordInput'
+
 
 function Signup(){
     const [email,setEmail]=useState('')
@@ -16,6 +19,15 @@ function Signup(){
     const passwordChange=(e)=>{setPassword(e.target.value)}
     const nameChange=(e)=>{setName(e.target.value)}
     const birthdateChange=(e)=>{setBirthdate(e.target.value)}
+
+    const handleEmailChange = (newEmail) => {
+      setEmail(newEmail);
+    };
+  
+    const handlePasswordChange = (newPassword) => {
+      setPassword(newPassword);
+    };
+  
     
     const createUser=(e)=>{
       e.preventDefault()
@@ -37,14 +49,8 @@ function Signup(){
             <label htmlFor="birthdate">Date of Birth:</label>
             <input type="date" id="birthdate" required onChange={birthdateChange}/><br />
           </div>
-          <div className="input-field">
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" required onChange={emailChange}/><br/>
-          </div>
-          <div className="input-field">
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" required onChange={passwordChange}/><br />
-          </div>
+          <EmailInput onEmailChange={handleEmailChange}/>
+          <PasswordInput onPasswordChange={handlePasswordChange}/> 
           <div id="button_container">
             <button type="submit" id="signupbtn" onClick={createUser}>Sign up</button>
           </div>
